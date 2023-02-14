@@ -1,7 +1,23 @@
-POST http://127.0.0.1:8000/api/users/
+
+## SignUp
+POST http://127.0.0.1:8000/api/signup/
 Content-Type: application/json
 
 {
-  "username": "aniketgm3",
-  "password": "aniketgm3"
+  "email": "aniket1@email.com",
+  "username": "aniket1",
+  "password": "aniket1"
 }
+
+## Login
+POST http://127.0.0.1:8000/api/login/
+Content-Type: application/json
+
+{
+  "email": "aniket1@email.com",
+  "password": "aniket1"
+}
+
+## Logout
+POST http://127.0.0.1:8000/api/logout/
+Content-Type: application/json
