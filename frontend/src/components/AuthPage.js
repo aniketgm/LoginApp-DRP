@@ -6,13 +6,16 @@ function AuthPage() {
 
   let navigate = useNavigate()
 
+  // Signup creds
   const [suser, setSuser] = useState('')
   const [semail, setSemail] = useState('')
   const [spswd, setSpswd] = useState('')
+
+  // Login Creds
   const [lemail, setLemail] = useState('')
   const [lpswd, setLpswd] = useState('')
 
-  const handleSignup = () => {
+  async function handleSignup() {
     const headers = { 'Content-Type': 'application/json' }
     const userinfo = {
       username: suser,
@@ -20,37 +23,38 @@ function AuthPage() {
       password: spswd
     }
     const api = userApis.userSignup
-    fetch(api.url, {
+    let resp = await fetch(api.url, {
       method: api.method,
       headers: headers,
       body: JSON.stringify(userinfo)
-    }).then((res) => {
-      if (res.ok) {
-        navigate('/dashboard/')
-      } else {
-        throw Error(res.status)
-      }
-    })
+    });
+    if (resp.ok) {
+      let data = await resp.json()
+      navigate('/dashboard/', { state: data })
+    } else {
+      throw Error(resp.status)
+    }
   };
 
-  const handleLogin = () => {
+  async function handleLogin() {
     const headers = { 'Content-Type': 'application/json' }
     const userinfo = {
       email: lemail,
       password: lpswd
     }
     const api = userApis.userLogin
-    fetch(api.url, {
+    let resp = await fetch(api.url, {
       method: api.method,
       headers: headers,
       body: JSON.stringify(userinfo)
-    }).then((res) => {
-      if (res.ok) {
-        navigate('/dashboard/')
-      } else {
-        throw Error(res.status)
-      }
-    })
+    });
+    if (resp.ok) {
+      let data = await resp.json()
+      console.log(data)
+      navigate('/dashboard/', { state: data })
+    } else {
+      throw Error(resp.status)
+    }
   };
 
   const preventRefresh = (e) => {

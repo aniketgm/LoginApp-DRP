@@ -1,10 +1,14 @@
-import React from "react"
-import { userApis } from "./Api"
-import { useNavigate } from "react-router-dom"
+import React from "react";
+import { userApis } from "./Api";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
 
   let navigate = useNavigate()
+
+  // Capture the state set by navigate call from AuthPage
+  let location = useLocation()
+  const { jwt } = location.state;
 
   const handleLogout = () => {
     const headers = { 'Content-Type': 'application/json' }
@@ -35,7 +39,10 @@ const Dashboard = () => {
       <div className="card">
         <h2 className="center">Your Info</h2>
         <p>
-          Your Info Here
+          {/* <strong>ID:</strong> {_id ? _id : ""}<br /> */}
+          {/* <strong>Name:</strong> {name ? name : ""}<br /> */}
+          {/* <strong>Email:</strong> {email ? email : ""} */}
+          <strong>JWT:</strong> {jwt ? jwt : ""}
         </p>
       </div>
     </div>

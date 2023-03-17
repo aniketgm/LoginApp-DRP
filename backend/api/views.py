@@ -17,7 +17,6 @@ class SignUpView(APIView):
 
 class LoginView(APIView):
     def post(self, request):
-
         email = request.data['email']
         password = request.data['password']
         user = UserAuth.objects.filter(email=email).first()
